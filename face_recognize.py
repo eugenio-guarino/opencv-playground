@@ -1,7 +1,7 @@
 import cv2
 
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
-
+img_counter = 1
 # grab the reference to the webcam
 vs = cv2.VideoCapture(0)
 
@@ -21,12 +21,19 @@ while True:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
     # show the frame to our screen
-    cv2.imshow("Video", frame)
-    key = cv2.waitKey(1) & 0xFF
+    cv2.imshow('Video', frame)
 
-    # if the 'q' key is pressed, stop the loop
-    if key == ord("q"):
+    # if the 'ESC' key is pressed, stop the loop
+    key = cv2.waitKey(1) & 0xFF
+    if key == 27:
         break
+    # SPACE pressed
+    elif key == 32:
+        img_name = 'facedetect_webcam_{}.png'.format(img_counter)
+        cv2.imwrite(img_name, frame)
+        print('{} saved.'.format(img_name))
+        img_counter += 1
 
 # close all windows
-cv2.destroyAllWindows();
+vs.release()
+cv2.destroyAllWindows()
