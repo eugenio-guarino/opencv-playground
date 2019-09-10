@@ -1,5 +1,9 @@
 # opencv-playground
 
+### About
+
+Just a repo that contains some code snippets I created to practice OpenCV in Python.
+
 ### Install
 
 This project files requires **Python 3** and the following Python libraries installed:
@@ -22,7 +26,3 @@ Following are some links to install OpenCV and dlib on mac, windows and linux:
 ```bash
 python {file_name}.py
 ```  
-
-## About
-
-Just a repo that contains some code snippets I created to practice OpenCV in Python.
