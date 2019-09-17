@@ -1,15 +1,18 @@
 import cv2
 
 faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
-img_counter = 1
 # grab the reference to the webcam
 vs = cv2.VideoCapture(0)
+
+f = open('counter.txt', 'rt+')
+firstLine = f.readline()
+img_counter = int(firstLine)
+
 
 # keep looping
 while True:
     # grab the current frame
     ret, frame = vs.read()
-    frame = cv2.resize(frame, (0, 0), fx=0.8, fy=0.8)
 
     # if we are viewing a video and we did not grab a frame,
     # then we have reached the end of the video
@@ -35,7 +38,10 @@ while True:
         cv2.imwrite(img_name, frame)
         print('{} saved.'.format(img_name))
         img_counter += 1
-
+        f.close()
+        f = open('counter.txt', 'w')
+        f.write(f'{img_counter}')
 # close all windows
+f.close()
 vs.release()
 cv2.destroyAllWindows()
